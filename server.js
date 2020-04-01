@@ -19,8 +19,8 @@ app.all("*", function(request, response) {
 
     for (const handler of handlers) {
         if (handler.type === "static" && handler.path === request.path) {
-            request.type(handler.contentType);
-            request.send(handler.content);
+            response.type(handler.contentType);
+            response.send(handler.content);
             return;
         }
         if (handler.type === "custom") {
