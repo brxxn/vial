@@ -1,7 +1,6 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
-const constants = require("./constants");
 const logger = require("./logger");
 const fs = require("fs")
 const util = require('./util');
@@ -9,13 +8,20 @@ const util = require('./util');
 let handlers = [];
 let config = {};
 
-app.use(bodyParser.raw())
+app.use(bodyParser.text({
+    type: "*/*"
+}));
 
 app.all("*", function(request, response) {
-    console.log(constants.BLUE + "========================================================================");
-    console.log(`${constants.GREEN}URL: ${constants.YELLOW}${request.url}`);
-    console.log(`${constants.GREEN}Headers: ${constants.RESET}`);
-    console.dir(request.headers);
+    if (!(config.ignorePaths && config.ignorePaths.includes(request.path))) {
+        logger.createLine();
+        logger.logValue('URL', request.url);
+        logger.logValue('Headers', '');
+        console.dir(request.headers);
+        if (request.body && request.body.length) {
+            logger.logValue('Body', request.body);
+        }
+    }
 
     for (const handler of handlers) {
         if (handler.type === "static" && handler.path === request.path) {
@@ -62,7 +68,7 @@ const listener = app.listen(process.env.PORT || 8080, function() {
         config = JSON.parse(file);
         for (let handler of config.handlers) {
             if (handler.type === "static") {
-                const content = fs.readFileSync('./content/' + handler.fileName);
+                const content = fs.readFileSync('./content/' + handler.content);
                 const contentType = handler.contentType || 'text/html';
                 handlers.push({
                     type: 'static',
@@ -77,7 +83,7 @@ const listener = app.listen(process.env.PORT || 8080, function() {
             }
         }
     } catch (ex) {
-        logger.error('failed to read config');
+        logger.error('Invalid or non-existent configuration file (config.json)');
         logger.error(ex.message);
         console.error(ex);
     }

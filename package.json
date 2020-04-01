@@ -1,5 +1,5 @@
 {
-  "name": "checkmate-server",
+  "name": "vial-server",
   "version": "1.0.0",
   "description": "A base, extendable server for vulnerability debugging",
   "main": "server.js",
