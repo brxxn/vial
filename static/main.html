@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <title>Vial</title>
+  </head>
+  <body>
+    <div class="p-3 mb-3 bg-white border-bottom shadow-sm">
+        <div class="align-items-center d-flex flex-column flex-md-row" style="margin-left: 100px; margin-right: 100px;">
+            <h5 class="my-0 mr-md-auto" >Vial</h5>
+            <a class="btn btn-primary" href="https://github.com/brxxn/vial">View source on GitHub</a>
+        </div>
+    </div>
+    <div style="margin-left: 100px; margin-right: 100px;">
+        <h1>Vial</h1>
+        <p>
+            Welcome to Vial! If you're seeing this page, that means <b>it works</b>! Here are some useful instructions for using Vial.
+        </p>
+        <h3>Page Content</h3>
+        <p>Want to serve a basic page without any server-side logic? All you have to do is open your <code>config.json</code> and add an object that looks like this to the <code>handlers</code> key:</p>
+        <pre>{"type": "static", "path": "/basic-page", "fileName": "cool-page.html", "contentType": "text/html"}</pre>
+        <p>Then, write some HTML in <code>cool-page.html</code>, restart this server, and visit <code>/basic-page</code>. You can serve images, videos, text files, and anything you want by adding the file and changing the <code>contentType</code> to the mime type of the file.</p>
+        <h3>Handlers</h3>
+        <p>Making a handler is pretty easy. See the handler in <code>handlers/base.js</code> for reference. The request and response objects provided are from express, so anything you can do there should work. Once you have created the file for your handler, you need to register it in the <code>config.json</code> by adding <code>{"type":"custom","handler":"base.js"}</code> to the <code>handlers</code> key.</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
